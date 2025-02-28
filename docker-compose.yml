@@ -1,0 +1,27 @@
+services:
+  app1:
+    build: ./app1
+    container_name: app1
+    networks:
+      - app-network
+    
+  app2:
+    build: ./app2
+    container_name: app2
+    networks:
+      - app-network
+  
+  nginx:
+    build: ./nginx
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+    networks:
+      - app-network
+    depends_on:
+      - app1
+      - app2
+
+networks:
+  app-network:
+    driver: bridge
