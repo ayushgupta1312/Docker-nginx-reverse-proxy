@@ -12,10 +12,12 @@ services:
       - app-network
   
   nginx:
-    build: ./nginx
-    container_name: nginx-proxy
-    ports:
-      - "80:80"
+  image: nginx:latest
+  container_name: nginx-proxy
+  ports:
+    - "80:80"
+  volumes:
+    - ~/nginx-html:/usr/share/nginx/html:ro
     networks:
       - app-network
     depends_on:
